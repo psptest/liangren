@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>Configure instrusion alarm notifications</string>
+	<dict>
+		<key>section</key>
+		<string>Alarm &amp; Notifications</string>
+		<key>item</key>
+		<array>
+			<string>Text &amp; Push Notifacations</string>
+			<string>Alert with Sirens</string>
+			<string>Alert with Lights</string>
+		</array>
+	</dict>
+	<dict>
+		<key>section</key>
+		<string>Capture video from these cameras</string>
+		<key>item</key>
+		<array>
+			<string>Select Cameras</string>
+		</array>
+	</dict>
+</array>
+</plist>

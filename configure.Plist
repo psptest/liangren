@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Away</string>
+		<key>image</key>
+		<string>btn-goodbye-sel</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Stay</string>
+		<key>image</key>
+		<string>btn-im-home-sel</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Disarm</string>
+		<key>image</key>
+		<string>btn-all-clear-sel</string>
+	</dict>
+</array>
+</plist>

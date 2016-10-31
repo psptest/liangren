@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>devices</key>
+	<array>
+		<dict>
+			<key>dev_id</key>
+			<integer>1</integer>
+			<key>dev_type</key>
+			<string>A010404020015</string>
+			<key>mode</key>
+			<integer>0</integer>
+			<key>name</key>
+			<string>what a fuck</string>
+			<key>status</key>
+			<dict>
+				<key>enable</key>
+				<integer>0</integer>
+				<key>low_battery</key>
+				<integer>0</integer>
+				<key>mode</key>
+				<integer>0</integer>
+				<key>report</key>
+				<integer>0</integer>
+			</dict>
+			<key>table_id</key>
+			<string>0</string>
+			<key>update_time</key>
+			<string>1467020127</string>
+		</dict>
+	</array>
+</dict>
+</plist>

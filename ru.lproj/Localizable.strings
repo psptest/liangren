@@ -1,0 +1,167 @@
+/*
+ Localizable.strings
+ testlib
+ 
+ Created by Sen5 on 16/10/11.
+ Copyright © 2016年 hsl. All rights reserved.
+ */
+"Done" = "Выполнено";
+"Connected_Unsuccessfully" = "Сбой подключения!";
+"Change_To_WIFI" = "change to WIFI connect ";
+"Change_To_Cell" = "change to Cell connect";
+
+"Away" = "ОХРАНА(ПОЛНАЯ)";
+"Stay" = "ОХРАНА(ПЕРИМЕТР)";
+"Disarm" = "НЕТ ОХРАНЫ";
+"Favorate_device" = "    Важные устройства";
+"Dashboard" = "Главная";
+"myHome" = "Мой дом";
+"Scene" = "Действие";
+"Camera"  = "Камера";
+"Settings" = "Настройки";
+
+"No_House" = "暂无智能网关";
+"Network_Interruption" = "网络不畅";
+// faid to connect
+// connecting
+"UserID_Fail" = "用户ID检测失败";
+
+"Triggered" = "переключился";
+"Add_Favorat_Device" = "Добавить важное устройство";
+
+// myHome
+
+"Rooms" = "Комнаты";
+"Devices" = "Устройства";
+
+// room
+"Back" = "返回";
+
+// device
+"Control" = "Управление";
+"Sensor" = "Датчик";
+"Light" = "Освещение";
+"Binary Switch" = "Binary Switch";
+"Outlet" = "Розетка";
+"Relay" = "Relay";
+"Door Sensor" = "Датчик двери";
+"Infrared Sensor" = "ИК-датчик";
+"Smoke Sensor" = "Датчик дыма";
+"Gas Sensor" = "Датчик газа";
+"CO Sensor" = "Датчик CO";
+"Shake Sensor" = "Датчик удара";
+"Water Sensor" = "Датчик выды";
+"Remote Control" = "Управление датчиками охраны";
+"SOS Sensor" = "Датчик помощи";
+"Siren Sensor" = "色温传感器";
+"Humidity_Temperature Sensor" = "Датчик влажности";
+
+// edit device
+"Edit_Device" = "Редактировать устройство";
+"Give_Device_Name" = "Дайте название устройству";
+"Select_Room" = "Выбор комнаты";
+"Remove_Device" = "Удалить устройство";
+"Device_Removed" = "Желаете удалить устройство?";
+"Device_Edited_Suc" = "设备编辑成功";
+"Device_Delet_Suc" = "设备删除成功";
+
+// select roomForDeviceViewController
+
+"Open" = "开启";
+"Closed" = "关闭";
+"Danger" = "危险";
+"Safety" = "安全";
+"Nowork" = "不在线";
+"Unknown" = "未知";
+
+// sceneViewController
+"Edit" = "编辑";
+"Add_New_Scene" = "Добавить действие";
+
+//Add New Scene
+"Give_Scene_Name" = "Дайте название действию";
+"Turn_On" = "开启设备";
+"Turn_Off" = "关闭设备";
+"Remove_Scene" = "Удалить действие";
+
+"Remove" = "移除";
+"Scene_Will_Delete" = "Желаете удалить действие?";
+"Sure" = "Да";
+"Not_Sure" = "Нет";
+"Scene_Edit_Suc" = "场景添加／编辑成功";
+"Scene_Del_Suc" = "场景删除成功";
+
+// Camera_ViewController
+"Stop_Recording" = "结束录制";
+"Start_Recording" = "开始录制";
+"Snap_Picture" = "抓拍图片";
+"Stop_Listening" = "结束监听";
+"Start_Listening" = "开始监听";
+"Switch_Standard" = "切换流畅";
+"Switch_High" = "切换高清";
+"Flip_Vertical" = "垂直翻转";
+"Flip_Horizontal" = "水平翻转";
+"Recording" = "正在录制";
+"camera_Changed" = "摄像头更新";
+
+// Setting View Controller
+"Pair home" = "Подключение дома";
+"Notification" = "Предупреждение";
+"Security Mode" = "Режим охраны";
+//"rooms" = "rooms";
+// 'Devices' = 'Devices'
+//"Scenes" = "场景";
+"Members" = "Пользователи";
+"Support" = "О программе";
+
+//choose HomeViewCOntroller
+//choose HomeViewCOntroller
+"Connect_Succ" = "Успешное подключение!";
+"House_Connected" =  "Успешное подключение к дому!";
+"Connecting" = "正在连接";
+
+"Are you sure you want to delete" = "Желаете удалить дом?";
+"House_Existed" = "Такой дом уже есть!";
+"Something_Wrong_QR" = "Сбой при добавлении!";
+"House_Added" = "智能家居网关添加成功";
+
+//AddHouseViewController
+"Add_New_Home" =  "Добавить дом";
+"Scan_QRCode" = "Просканируйте QR-код на Вашем смартфоне";
+
+// Setting HomeViewController
+"Give_Home_Name" = "Дайте название дому";
+"Remove_Home" = "Удалить дом";
+"Name_Nil" = "азвание не должно быть пустым!";
+
+"New_Device_Add" = "Добавить устройство";
+"Looking for your new device" = "Поиск новых устройств";
+"detaching New Device" = "设备添加成功";
+
+// securityViewController
+"Monitor" = "Слежение за системами в доме.";
+"Select_Sensors" = "Выбор датчиков для мониторинга.";
+"Select_Sensor" = "Выбор датчиков";
+"Open_All" = "打开全部传感设备";
+"Open_All_Except_Infrared" = "除红外传感外，其余设备全部打开";
+"Open_All_Except_Some" = "除门磁、红外、震动传感外，其余设备全部打开";
+"Security_Edited_Suc" = "安防模式编辑成功";
+
+
+
+// addRoomViewController
+"Add_New_Room" = "Добавить комнату";
+"Give_Room_Name" = "Дайте название комнате";
+"Add_Devices_To_Room" = "Добавить устройство в комнату";
+"Remove_Room" = "Удалить комнату";
+"Room_Deleted" = "Желаете удалить комнату?";
+"Room_Deleted_Suc" = "房间移除成功";
+"Room_Edited_Suc" = "房间编辑成功";
+
+
+// select device for room ViewController
+"Select_Device" = "Добавить устройство в комнату";
+
+
+// support ViewController
+"Version" = "Версия";

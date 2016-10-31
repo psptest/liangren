@@ -1,0 +1,184 @@
+/* 
+  Localizable.strings
+  testlib
+
+  Created by Sen5 on 16/10/11.
+  Copyright © 2016年 hsl. All rights reserved.
+*/
+
+
+// total
+"Done" = "Done";
+"Connected_Unsuccessfully" = "Connected Unsuccessfully";
+"Connected_Succ" = "Connected successfully";
+"Change_To_WIFI" = "change to WIFI connect ";
+"Change_To_Cell" = "change to Cell connect";
+// first page
+
+"Away" = "ARM(AWAY)";
+"Stay" = "ARM(STAY）";
+"Disarm" = "Disarm";
+"Favorate_device" = "    Favorate Devices";
+"Dashboard" = "Dashboard";
+"myHome" = "myHome";
+"Scene" = "Scene";
+"Camera"  = "Camera";
+"Settings" = "Settings";
+
+
+"No_House" = "No house!";
+"Network_Interruption" = "Network interruption!";
+// faid to connect
+// connecting
+"UserID_Fail" = "check userId fail...";
+
+"Triggered" = "Triggered";
+
+// addFavorateViewController
+
+"Done" = "Done";
+"Add_Favorat_Device" = "Add favorate device";
+
+
+// myHome
+
+"Rooms" = "Rooms";
+"Devices" = "Devices";
+
+
+// room
+
+"Back" = "Back";
+
+// device
+"Control" = "control";
+"Sensor" = "sensor";
+"Light" = "Light";
+"Binary Switch" = "Binary Switch";
+"Outlet" = "Outlet";
+"Relay" = "Relay";
+"Door Sensor" = "Door Sensor";
+"Infrared Sensor" = "Infrared Sensor";
+"Smoke Sensor" = "Smoke Sensor";
+"Gas Sensor" = "Gas Sensor";
+"CO Sensor" = "CO Sensor";
+"Shake Sensor" = "Shake Sensor";
+"Water Sensor" = "Water Sensor";
+"Remote Control" = "Remote Control";
+"SOS Sensor" = "SOS Sensor";
+"Siren Sensor" = "Siren Sensor";
+"Humidity_Temperature Sensor" = "Humidity_Temperature Sensor";
+
+
+
+// edit device
+"Edit_Device" = "Edit device";
+"Give_Device_Name" = "Give your device a name";
+"Select_Room" = "Select room";
+"Remove_Device" = "Remove device";
+"Device_removed" = "the device will be deleted ";
+"Device_Edited_Suc" = "Device editted successfully";
+"Device_Delet_Suc" = "Device deleted successfully";
+
+
+// select roomForDeviceViewController
+
+"Open" = "Opened";
+"Closed" = "Closed";
+"Danger" = "Danger";
+"Safety" = "Safety";
+"Unknown" = "Unknown";
+"Nowork" = "Nowork";
+
+//sceneEdit
+
+"Scene" = "Scene";
+"Edit" = "Edit";
+"Add_New_Scene" = "Add new scene";
+
+//Add New Scene
+"Give_Scene_Name" = "Give your scene a name";
+"Turn_On" = "Turn on these devices";
+"Turn_Off" = "Turn off these devices";
+"Remove_Scene" = "Remove Scene";
+
+"Remove" = "Remove";
+"Scene_Will_Delete" = "the scene will be deleted";
+"Sure" = "Sure";
+"Not_Sure" = "Cancel";
+
+"Scene_Edit_Suc" = "Scene Added/Edited Successfully";
+"Scene_Del_Suc" = "Scene Deleted Successfully";
+
+
+// Camera_ViewController
+"Stop_Recording" = "stop recording";
+"Start_Recording" = "start recording";
+"Snap_Picture" = "snap picture";
+"Stop_Listening" = "stop listening";
+"Start_Listening" = "start listening";
+"Switch_Standard" = "switch to standard definition";
+"Switch_High" = "switch to high definition";
+"Flip_Vertical" = "flip vertical";
+"Flip_Horizontal" = "flip horizontal";
+"Recording" = "Recording";
+"camera_Changed" = "camera changed";
+// Setting View Controller
+"Pair home" = "Pair home";
+"Notification" = "Notification";
+"Security Mode" = "Security Mode";
+//"rooms" = "rooms";
+// 'Devices' = 'Devices'
+"Scenes" = "Scenes";
+"Members" = "Members";
+"Support" = "Support";
+
+//choose HomeViewCOntroller
+"Connect_Succ" = "Connect successfully";
+"House_Connected" =  "House have connected";
+"Connecting" = "Connecting...";
+"Are you sure you want to delete" = "Are you sure you want to delete";
+
+
+//AddHouseViewController
+"Add_New_Home" =  "Add new home";
+"Scan_QRCode" = "Please scan the QR code in TV to make your mobile phone";
+"House_Existed" = "House has existed";
+"Something_Wrong_QR" = "There's something wrong with QR";
+"House_Added" = "House added successfully";
+
+// Setting HomeViewController
+"Give_Home_Name" = "Give your home a name";
+"Remove_Home" = "Remove home";
+"Name_Nil" = "Name cannot be nil";
+
+// Looking Device ViewController
+"New_Device_Add" = "Add new device";
+"Looking for your new device" = "Looking for your new device";
+"detaching New Device" = "detaching New Device";
+
+// configureViewController
+
+// securityViewController
+"Monitor" = "Monitor your home for carbonmonoxide,fire,intrusion,leak and much more";
+"Select_Sensors" = "Select sensors to monitor when the home is unoccupied";
+"Select_Sensor" = "Select sensors";
+"Open_All" = "Open all sensors";
+"Open_All_Except_Infrared" = "Open all sensor,except infrared sensor";
+"Open_All_Except_Some" = "Open all sensors,except infrared sensor,door sensor and shock sensor";
+"Security_Edited_Suc" = "Security mode edited successfully";
+
+// addRoomViewController
+"Add_New_Room" = "Add new room";
+"Give_Room_Name" = "Give your room a name";
+"Add_Devices_To_Room" = "Add Devices to your room";
+"Remove_Room" = "Remove room";
+"Room_Deleted" = "the room will be deleted";
+"Room_Deleted_Suc" = "Room deleted successfully";
+"Room_Edited_Suc" = "Room edited successfully";
+
+// select device for room ViewController
+"Select_Device" = "Select Devices";
+
+// support ViewController
+"Version" = "Version";

@@ -1,0 +1,169 @@
+/* 
+  Localizable.strings
+  testlib
+
+  Created by Sen5 on 16/10/11.
+  Copyright © 2016年 hsl. All rights reserved.
+*/
+"Done" = "完成";
+"Connected_Unsuccessfully" = "连接失败";
+"Connected_Succ" = "连接成功";
+"Change_To_WIFI" = "切换到WIFI网络";
+"Change_To_Cell" = "切换到蜂窝网络";
+
+"Away" = "外出模式";
+"Stay" = "在家模式";
+"Disarm" = "撤防模式";
+"Favorate_device" = "    常用设备";
+"Dashboard" = "控制台";
+"myHome" = "家庭";
+"Scene" = "场景";
+"Camera"  = "摄像头";
+"Settings" = "设置";
+
+"No_House" = "暂无智能网关";
+"Network_Interruption" = "网络不畅";
+// faid to connect
+// connecting
+"UserID_Fail" = "用户ID检测失败";
+
+"Triggered" = "被触发";
+"Done" = "完成";
+"Add_Favorat_Device" = "添加常用设备";
+
+// myHome
+
+"Rooms" = "房间";
+"Devices" = "设备";
+
+// room
+"Back" = "返回";
+
+// device
+"Control" = "控制设备";
+"Sensor" = "传感器";
+"Light" = "智能灯";
+"Binary Switch" = "Binary Switch";
+"Outlet" = "智能插座";
+"Relay" = "Relay";
+"Door Sensor" = "门磁传感器";
+"Infrared Sensor" = "移动侦测传感器";
+"Smoke Sensor" = "烟雾传感器";
+"Gas Sensor" = "气体传感器";
+"CO Sensor" = "一氧化碳传感器";
+"Shake Sensor" = "震动传感器";
+"Water Sensor" = "水浸传感器";
+"Remote Control" = "安防遥控器";
+"SOS Sensor" = "警报器";
+"Siren Sensor" = "色温传感器";
+"Humidity_Temperature Sensor" = "温湿度传感器";
+
+// edit device
+"Edit_Device" = "编辑设备";
+"Give_Device_Name" = "命名设备";
+"Select_Room" = "选取房间";
+"Remove_Device" = "删除设备";
+"Device_Removed" = "删除此设备";
+"Device_Edited_Suc" = "设备编辑成功";
+"Device_Delet_Suc" = "设备删除成功";
+
+// select roomForDeviceViewController
+"Select_Room" = "选取房间";
+"Open" = "开启";
+"Closed" = "关闭";
+"Danger" = "危险";
+"Safety" = "安全";
+"Nowork" = "不在线";
+"Unknown" = "未知";
+
+// sceneViewController
+"Scene" = "场景";
+"Edit" = "编辑";
+"Add_New_Scene" = "添加新场景";
+
+//Add New Scene
+"Give_Scene_Name" = "命名场景";
+"Turn_On" = "开启设备";
+"Turn_Off" = "关闭设备";
+"Remove_Scene" = "删除智能场景";
+
+"Remove" = "移除";
+"Scene_Will_Delete" = "删除此智能场景";
+ "Sure" = "确定";
+"Not_Sure" = "取消";
+"Scene_Edit_Suc" = "场景添加／编辑成功";
+"Scene_Del_Suc" = "场景删除成功";
+
+// Camera_ViewController
+"Stop_Recording" = "结束录制";
+"Start_Recording" = "开始录制";
+"Snap_Picture" = "抓拍图片";
+"Stop_Listening" = "结束监听";
+"Start_Listening" = "开始监听";
+"Switch_Standard" = "切换流畅";
+"Switch_High" = "切换高清";
+"Flip_Vertical" = "垂直翻转";
+"Flip_Horizontal" = "水平翻转";
+"Recording" = "正在录制";
+"camera_Changed" = "摄像头更新";
+
+// Setting View Controller
+"Pair home" = "智能网关";
+"Notification" = "通知中心";
+"Security Mode" = "安防模式";
+//"rooms" = "rooms";
+// 'Devices' = 'Devices'
+"Scenes" = "场景";
+"Members" = "成员";
+"Support" = "关于";
+
+//choose HomeViewCOntroller
+//choose HomeViewCOntroller
+"Connect_Succ" = "连接成功";
+"House_Connected" =  "房间已连接";
+"Connecting" = "正在连接";
+"Are you sure you want to delete" = "智能家居网关将删除";
+"House_Existed" = "智能家居网关已存在";
+"Something_Wrong_QR" = "扫描失败";
+"House_Added" = "智能家居网关添加成功";
+
+//AddHouseViewController
+"Add_New_Home" =  "添加智能家居网关";
+"Scan_QRCode" = "请扫描电视屏幕上的二维码配对";
+
+// Setting HomeViewController
+"Give_Home_Name" = "命名智能网关";
+"Remove_Home" = "删除智能网关";
+"Name_Nil" = "名字不能为空";
+
+"New_Device_Add" = "添加新设备";
+"Looking for your new device" = "正在搜索您的新设备";
+"detaching New Device" = "设备添加成功";
+
+// securityViewController
+"Monitor" = "监测可燃气体，有害气体，温湿度，未经许可的闯入等家居环境";
+"Select_Sensors" = "选取一个侦测未经许可的闯入设备";
+"Select_Sensor" = "选取传感器";
+"Open_All" = "打开全部传感设备";
+"Open_All_Except_Infrared" = "除红外传感外，其余设备全部打开";
+"Open_All_Except_Some" = "除门磁、红外、震动传感外，其余设备全部打开";
+"Security_Edited_Suc" = "安全模式编辑成功";
+
+
+
+// addRoomViewController
+"Add_New_Room" = "添加新房间";
+"Give_Room_Name" = "命名房间";
+"Add_Devices_To_Room" = "添加设备到房间";
+"Remove_Room" = "移除房间";
+"Room_Deleted" = "删除此房间";
+"Room_Deleted_Suc" = "房间移除成功";
+"Room_Edited_Suc" = "房间编辑成功";
+
+
+// select device for room ViewController
+"Select_Device" = "选取设备";
+
+
+// support ViewController
+"Version" = "版本号";
