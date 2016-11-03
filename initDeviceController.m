@@ -26,7 +26,6 @@ const CGFloat kLeftDistance = 15;
 
 @implementation initDeviceController
 {
-    DeviceModel *_mod;
     NSArray *_selectedRooms;
     NSInteger _room_id;
 }
@@ -123,7 +122,9 @@ const CGFloat kLeftDistance = 15;
     //父类方法
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-    [self.changeCell setIcan:[UIImage imageNamed:@"ic_default_scene_nor"]];
+   NSString *img = [[fileOperation sharedOperation ] getImageNameWithDevice_type:[(DeviceModel *)[self mod] dev_type] device_mode:[(DeviceModel *)[self mod] mode]][@"device"];
+    
+    [self.changeCell setIcan:[UIImage imageNamed:img]];
     
     if (indexPath.row == 1) {
         

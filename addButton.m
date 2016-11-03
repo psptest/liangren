@@ -24,10 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.btnBlock = clickBlock;
-#if 0
-        [self setImage:[[UIImage imageNamed:@"btn_add_nor"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]forState:UIControlStateNormal];
-        [self setImage:[[UIImage imageNamed:@"btn_add_pre"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]forState:UIControlStateHighlighted];
-#endif
+        
         self.layer.cornerRadius = frame.size.width/2.0f;
         self.clipsToBounds = YES;
         
@@ -40,6 +37,7 @@
 {
     [self setImage:img forState:UIControlStateNormal];
 }
+
 -(void)setHightImg:(UIImage *)img
 {
      [self setImage:img forState:UIControlStateHighlighted];

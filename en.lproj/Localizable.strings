@@ -146,6 +146,7 @@
 "House_Existed" = "House has existed";
 "Something_Wrong_QR" = "There's something wrong with QR";
 "House_Added" = "House added successfully";
+"House" = "House";
 
 // Setting HomeViewController
 "Give_Home_Name" = "Give your home a name";

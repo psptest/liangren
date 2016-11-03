@@ -1,0 +1,761 @@
+﻿/*
+** NAS数据结构
+*/
+
+#ifndef _H_NAS_STRUCT_DEFINE_
+#define _H_NAS_STRUCT_DEFINE_
+
+
+#include "CommonDefine.h"
+
+#ifdef _WIN32
+#define STDCALL	__stdcall
+#else
+#define STDCALL
+#endif
+
+
+// Set
+#define NAS_SET_PARAM_NETWORK		0x2000		// 设置参数STRU_NAS_NETWORK_PARAM
+#define NAS_SET_PARAM_USERINFO		0x2001		// 设置设备用户信息STRU_NAS_USER_INFO
+#define NAS_SET_PARAM_DDNS			0x2002		// 设置DDNS 参考STRU_NAS_DDNS_PARAM
+#define NAS_SET_PARAM_FTP			0x2003		// 设置FTP 参考STRU_NAS_FTP_PARAM
+#define NAS_SET_PARAM_MAIL			0x2004		// 设置邮件 STRU_NAS_MAIL_PARAM
+#define NAS_SET_PARAM_WIFI			0x2005		// 设置wifi 参考STRU_NAS_WIFI_PARAM
+#define NAS_SET_PARAM_DATETIME		0x2006		// 设置设备时钟 STRU_NAS_DATETIME_PARAM
+#define NAS_SET_PARAM_RECORDSCH 	0x2007		// 设置录像周期及参数STRU_NAS_RECORDSCH_PARAM
+#define NAS_SET_PARAM_ALIAS			0x2008		// 设置设备名称 STRU_NAS_ALIAS_PARAM
+#define NAS_SET_PARAM_APWIFI		0x2009		// 设置AP参数STRU_NAS_APWIFI_PARAM
+#define NAS_SET_PARAM_MOUNT_CAMERA	0x200A		// 设置接入摄像头 STRU_NAS_MOUNT_CAMERA_PARAM
+#define NAS_SET_PARAM_PPPOE			0x200B		// 设置pppoe参数STRU_NAS_PPPOE_PARAM
+#define NAS_SET_PARAM_PNP_SERVER	0x200C		// 设置pnpserver参数STRU_NAS_PNPSERVER_PARAM
+#define NAS_SET_PARAM_ALARM			0x200D		// 设置报警参数STRU_NAS_ALARM_PARAM
+#define NAS_SET_FORMAT_DISK			0x200E		// 格式化设置STRU_NAS_FORMAT_DISK
+#define NAS_SET_PARAM_FACTORY		0x200F		// 
+// 设置缺省值
+#define NAS_SET_LOAD_DEFAULT		0x2010		// 恢复默认参数
+
+// ---------smart plug temp------------------
+#define NAS_SET_PARAM_SMART_PLUG_RELAY			0x2011		// 设置智能开关状态SmartPlugRelay
+#define NAS_SET_PARAM_SMART_PLUG_TASK_SCHEDULE	0x2012		// 设置智能开关安全保护密码SmartPlugKey
+#define NAS_SET_PARAM_SMART_PLUG_TASK_DELAY		0x2013
+#define NAS_SET_PARAM_SMART_PLUG_KEY			0x2014
+#define NAS_SET_PARAM_SMART_PLUG_DIRECT_CONN	0x2015
+// ---------smart plug temp end---------------
+
+#define NAS_SET_ALARM_LOG_CLEAR			0x2016
+#define NAS_SET_PARAM_ALARM_STUDY		0x2017				// 设置报警对码 STRU_WVR_ALARM_DEVICE_CODE
+#define NAS_SET_PARAM_CAMERA_CONTROL	0x2018				// 设置对比度，亮度等 STRU_WVR_CAMERA_CONTROL
+#define NAS_SET_PARAM_ALARM_MODULE_CONTROL	0x2019			// 设置报警模块 STRU_WVR_ALARM_MODULE_CONTROL
+#define NAS_SET_PARAM_IOS_PUSH_START		0x201A			// 接收设备推送 STRU_WVR_IOS_PUSH_PARAM
+#define NAS_SET_PARAM_IOS_PUSH_STOP			0x201B			// 停止接收设备推送 STRU_WVR_IOS_PUSH_PARAM
+
+// Get
+#define NAS_GET_LOGIN_PARAM			0x2100		// 获取登录用户权限，参考STRU_NAS_LOGIN_PARAM
+#define NAS_GET_PARAM_STATUS		0x2101		// 获取设备状态STRU_NAS_STATUS_PARAM
+#define NAS_GET_PARAM_MOUNT_CAMERA	0x2102		// 获取接入的摄像头STRU_NAS_MOUNT_CAMERA_PARAM
+#define NAS_GET_LOG					0x2103		// 获取日志
+#define NAS_GET_PARAM_DATETIME  	0x2104		// 获取设备时钟参数
+#define NAS_GET_PARAM_PPPOE			0x2105		// 获取pppoe参数
+#define NAS_GET_PARAM_DDNS			0x2106		// 获取ddns参数
+#define NAS_GET_PARAM_RECORDSCH 	0x2107		// 获取录像周期设置 STRU_NAS_RECORDSCH_PARAM
+#define NAS_GET_CAPTURE_FILE		0x2108		// 获取设备抓拍图片文件
+#define NAS_GET_PARAM_ALARM			0x2109		// 获取报警参数
+#define NAS_GET_PARAM_MAIL			0x210A		// 获取mail参数
+#define NAS_GET_PARAM_FTP			0x210B		// 获取ftp参数
+#define NAS_GET_PARAM_NETWORK		0x210C		// 获取网络参数
+#define NAS_GET_PARAM_APWIFI		0x210D		// 获取ap参数
+#define NAS_GET_PARAM_WIFI			0x210E		// 获取wifi参数
+#define NAS_GET_PARAM_WIFI_LIST 	0x210F		// 通过设备获取wifi热点 STRU_NAS_SEARCH_AP_RESULT
+#define NAS_GET_PARAM_FACTORY		0x2110		// 获取厂家参数，参考STRU_WVR_FACTORY_PARAM
+#define NAS_GET_PARAM_PNP_SERVER	0x2111		// 获取pnp server参数
+#define NAS_GET_PARAM_USERINFO		0x2112		// 获取设备用户数
+#define NAS_GET_PARAM_CAMERA_LIST	0x2113		// 通过设备搜索摄像机 参考STRU_NAS_CAMERA_SEARCH_RESULT_LIST
+#define NAS_GET_RECORD_FILE			0x2114		// 搜索录像文件
+
+// ---------smart plug temp------------------
+#define NAS_GET_PARAM_SMART_PLUG_RELAY			0x2115		// 获取智能开关状态SmartPlugRelay
+#define NAS_GET_PARAM_SMART_PLUG_TASK_SCHEDULE	0x2116		// 获取智能开关安全保护密码SmartPlugKey
+#define NAS_GET_PARAM_SMART_PLUG_TASK_DELAY		0x2117
+#define NAS_GET_PARAM_SMART_PLUG_KEY			0x2118
+// ---------smart plug temp end---------------
+
+#define NAS_GET_PARAM_APPVERSION	0x2119		// 获取应用固件版本信息
+#define NAS_GET_PARAM_ALARM_STUDY	0x211a		// 获取设备对码状态 STRU_WVR_ALARM_DEVICE_CODE_LIST
+#define NAS_GET_PARAMS				0x211b		// 奇怪的指令，目前的内容和datetime重复
+
+
+// control
+#define NAS_REBOOT_EDV				0x2200		// 重启设备
+#define NAS_RESTORE_FACTORY			0x2201		
+#define NAS_RECORD_CONTROL			0x2202		
+#define NAS_CHECK_USER				0x2203		
+#define NAS_UPGRADE_HTMLS			0x2204
+#define NAS_UPGRADE_FIREWARE		0x2205
+#define NAS_PLAY_BACK_CONTROL		0x2206
+#define NAS_AP_WPS_PBC_START		0x2207
+#define NAS_STA_WPS_PBC_START		0x2208
+#define NAS_WIFI_SCAN				0x2209
+#define NAS_SEARCH_CAMERA			0x220a
+
+#define NAS_MAIL_TEST               0x220b		// 邮件测试
+#define NAS_FTP_TEST                0x220c		// ftp测试
+#define NAS_TEST_MAIL               0x220d		// mail测试
+#define NAS_TEST_FTP                0x220e		// ftp ?
+#define NAS_CONFIG_MODE             0x220f
+#define NAS_DECODER_CONTROL         0x2210		// 云台控制
+
+
+#define WVR_CHANNEL_MAX_COUNT		4			// WVR最大通道数
+
+/*
+ * 设备名称结构
+ */
+typedef struct tag_STRU_NAS_ALIAS_PARAM
+{
+	char alias[32];
+}STRU_NAS_ALIAS_PARAM, *PSTRU_NAS_ALIAS_PARAM;
+
+/*
+ * 设备状态结构
+ */
+typedef struct tag_STRU_NAS_STATUS_PARAM
+{
+	char sys_ver[32];	// WVR系统固件版本号
+	char deviceid[32];
+	char alias[32];	
+	char apssid[64];
+	int apencrypt;	/*	NAS AP加密方式	0-NONE          1-WEP
+						2-WPA-PSK/AES    3-WPA-PSK/TKIP
+						4-WPA2-PSK/AES  5-WPA2-PSK/TKIP
+					*/
+	char externssid[64];	// 连接外部路由器的SSID
+	int externsignale;		// 连接外部路由器信号强度
+	int externstatus;		/*	连接外部路由器状态	
+							0：未连接    1：连接中  2：连接失败
+							10：连接成功
+							*/
+	int internet;			/* Internet连通状态		
+							0：Internet 未通
+							1：Internet 成功
+							*/
+
+	char mac[32];	 		// wvr eth1 有线mac地址	 
+	char wifimac[32];		// wvr ath1 无线station mac地址	 
+	int alarm_status;	// 报警状态	 
+	int p2pstatus;	 	// p2p状态	 
+	int dns_status;		// ddns状态	 
+	int upnp_status;	// upnp状态	 
+	int externwifi;
+	int record_sd_status;
+	int sdtotal;		// 磁盘总大小	 
+	int sdfree;
+	int sdlevel;
+							
+	int harddiskstatus;		/*NAS 磁盘数量	
+							0：硬盘未接
+							>0：表示几块硬盘
+							*/
+	int hdpartitionnum;		// 分区总数
+	int  harddisk0status;	/*磁盘分区0状态 	
+							0：分区不存在
+							1：分区未格式化
+							2：索引表损坏
+							10：正常
+							*/
+	int harddisk1status;
+	int harddisk2status;
+	int harddisk3status;
+	int harddisk4status;
+	int harddisk5status;
+	int harddisk6status;
+	int harddisk7status;
+	int harddisk8status;
+	int harddisk9status;
+	int harddisk10status;
+	int harddisk11status;
+	int harddisk12status;
+	int harddisk13status;
+	int harddisk14status;
+	int harddisk15status;
+	int Partition0size;		// 磁盘分区0大小	
+	int Partition1size;
+	int Partition2size;
+	int Partition3size;
+	int Partition4size;
+	int Partition5size;
+	int Partition6size;
+	int Partition7size;
+	int Partition8size;
+	int Partition9size;
+	int Partition10size;
+	int Partition11size;
+	int Partition12size;
+	int Partition13size;
+	int Partition14size;
+	int Partition15size;
+	int cam0status;			/*摄像头0状态	
+							0：未配置
+							1：已配置
+							2：用户名或密码不正确
+							3：无ID号
+							10：连接成功
+							*/
+	int cam1status;			// 摄像头1状态	 
+	int	cam2status;			// 摄像头2状态	 
+	int	cam3status;			// 摄像头3状态	 	 
+
+}STRU_NAS_STATUS_PARAM,*PSTRU_NAS_STATUS_PARAM;
+
+/*
+ * 网络参数eth0结构
+ */
+typedef struct tag_STRU_NAS_NETWORK_PARAM
+{
+	char ipaddr[32];		// 网络ip地址	 
+	char mask[32];			// 网络掩码	 
+	char gateway[32];		// 网关	 
+	int port;				// 网络工作端口	默认81
+	int rtspport;			// RTSP端口	 
+	int dhcpenable;			// 网络是否启动DHCP来获取IP地址	0：禁用1：启用
+	char dns1[32];	 		// 第一dns服务器	 
+	char dns2[32];			// 第二dns服务器 
+}STRU_NAS_NETWORK_PARAM,*PSTRU_NAS_NETWORK_PARAM;
+
+/*
+ * 设备用户信息结构
+ */
+typedef struct tag_STRU_NAS_USER_INFO
+{
+	char user1[64];		// 访客，如果为空，表示未设置	最大31个字符
+	char pwd1[64];		// 最大31个字符
+	char user2[64];		// 操作者，如果为空，表示未设置	最大31个字符
+	char pwd2[64];
+	char user3[64];		// 管理员，不能为空，缺省值为admin	最大31个字符
+	char pwd3[64];
+}STRU_NAS_USER_INFO,*PSTRU_NAS_USER_INFO;
+
+/*
+ * WIFI参数
+ */
+typedef struct tag_STRU_NAS_WIFI_PARAM
+{
+	int enable;		// wifi充许位	0：禁用 1：启用
+	char ssid[64];	// wifi连接外部router的ssid	最大63个字符
+	int channel; 	// 连接外部router的通道	 
+	int mode;		// 连接外部router的模式	 
+	int encrypt;	// 连接外部router认证模式	 
+	char psk[64];	// 连接外部router的密码	最大63个字符
+}STRU_NAS_WIFI_PARAM,*PSTRU_NAS_WIFI_PARAM;
+
+
+/*
+ * 通过设备搜索到的热点
+ */
+typedef struct tag_STRU_NAS_SEARCH_AP_PARAM
+{
+	char ssid[64];			//ssid名称	最大63个字符
+	unsigned char mac[6];	// mac地址	 
+	int security;			// 认证模式	0->WEP-NONE 1->WEP 2->WPA-PSK/AES 3->WPA-PSK/TKIP 4->WPA2-PSK/AES  5->WPA2-PSK/TKIP
+	int dbm0;				// 信号强度	 
+	int dbm1;	 	 
+	int mode; 				//工作模式 	 0->infra 1->adhoc
+	int channel;			// 无线通道号	
+}STRU_NAS_SEARCH_AP_PARAM,*PSTRU_NAS_SEARCH_AP_PARAM;
+
+#define WVR_SEARCH_AP_MAX_COUNT		32
+typedef struct tag_STRU_NAS_SEARCH_AP_RESULT
+{
+	int ap_number;		// 当前搜索到n个SSID 0<=n<=32
+	STRU_NAS_SEARCH_AP_PARAM apList[WVR_SEARCH_AP_MAX_COUNT];
+}STRU_NAS_SEARCH_AP_RESULT,*PSTRU_NAS_SEARCH_AP_RESULT;
+
+/*
+ * 设备时钟参数
+ */
+typedef struct tag_STRU_NAS_DATETIME_PARAM
+{
+	int now;				// 现在时间, 不为0则以此值校时
+	int tz;					// 时区
+	int ntp_enable;			// NTP充许位	0：禁用 1：启用
+	char ntp_svr[64];		// NTP的服务器
+	int ntp_interval; 		// NTP同步时间间隔	单位为小时
+
+	int ntp_sync;			// 设置时用 ntpsync	立即与NTP Server进行同步时间操作 0：按ntpinterval时间隔进行同步 1：立即与NTP服务器同步时间	
+}STRU_NAS_DATETIME_PARAM, *PSTRU_NAS_DATETIME_PARAM;
+
+
+/*
+ *	DDNS参数
+ */
+typedef struct tag_STRU_NAS_DDNS_PARAM
+{
+	int service;   			// DDNS服务序号
+							// 0：禁止ddns服务
+							// 1：花生壳(暂不支持)
+							// 2：DynDns.org(dyndns)
+							// 3：DynDns.org(statdns)
+							// 4：DynDns.org(custom)
+							// 5：保留
+							// 6：保留
+							// 7：保留
+							// 8：3322(dyndns)
+							// 9：3322(statdns)
+							// 10：9299
+							
+	char user[32];			// ddns用户名	最大31个字符
+	char pwd[32];			// ddns密码	最大31个字符
+	char host[64];			// DDNS二级域名	最大63个字符
+	char proxy_svr[64];		// DDNS服务器	最大63个字符
+	int proxy_port;			// DDNS端口		
+}STRU_NAS_DDNS_PARAM, *PSTRU_NAS_DDNS_PARAM;
+
+/*
+ * FTP参数
+ */
+typedef struct tag_STRU_NAS_FTP_PARAM
+{
+	char server[64];		// ftp服务器地址	最大63个字符
+	int port;				// ftp服务器端口	默认21
+	char username[32];		// ftp用户	最大31个字符
+	char password[32];		// ftp密码	最大31个字符
+	char dir[32];			// ftp目录	最大31个字符
+	int mode;				// ftp模式	0：主动模式 1：被动模式
+}STRU_NAS_FTP_PARAM, *PSTRU_NAS_FTP_PARAM;
+
+/*
+ * 邮件参数
+ */
+typedef struct tag_STRU_NAS_MAIL_PARAM
+{
+	char server[64];			// 邮箱服务器地址	最大63个字符
+	int port;					// 邮箱服务器端口	 
+	char username[64];			// 邮箱用户	最大63个字符
+	char password[64];			// 邮箱密码	最大63个字符
+	int ssl;					// 邮箱认证	 
+	char sender[64];			// 邮箱发送者	最大63个字符
+	char receiver1[64];			// 邮箱接受者1	最大63个字符
+	char receiver2[64];			// 邮箱接受者2	最大63个字符
+	char receiver3[64];			// 邮箱接受者3	最大63个字符
+	char receiver4[64];			// 邮箱接受者4	最大63个字符	
+}STRU_NAS_MAIL_PARAM, *PSTRU_NAS_MAIL_PARAM;
+
+
+/*
+ *报警参数
+ */
+typedef struct tag_STRU_NAS_ALARM_PARAM
+{
+	int record_cover_enable;						// 表示录像覆盖	0->表示不充许 1->表示充许
+	int cameraenable[WVR_CHANNEL_MAX_COUNT];		// 表示摄像头0-3报警允许位	0->表示不充许 1->表示充许
+	int smoke;					// 表示烟感报警充许位	0->表示不充许 1->表示充许
+	int pir;					// 表示红外人体感应报警充许位	0->表示不充许 1->表示充许
+	int irc;	 				// 表示遥控报警允许位	 0->表示不充许 1->表示充许
+	int doorsensor; 	 		// 表示门磁报警允许位	 0->表示不充许 1->表示充许
+	int gas;	 				// 表示气感报警允许为	 0->表示不充许 1->表示充许
+	int input_armed; 			// 0：输入检测撤防；1：布防
+	int preset_sit; 			// 0：报警时禁止预置位联动；其他：报警时联动的预置位
+	int input_level; 			// 0：检测到低电平报警 1：检测到高电平报警
+	int linkage_enable; 		// 0：报警时禁止io联动；1：允许
+	int output_level; 			// io联动输出电平，0：低；1：高
+	int mail_enable; 			// 0：报警时禁止邮件通知；1：允许
+	int upload_interval; 		// 报警时上传图片的间隔（秒），0：禁止
+	int schedule_sun_0;		// 每天按24小时，每小时按15分钟划分为4个布防时段，全天共96个时间段；用12字节表示，每一bit代表一个时间段；
+							// bit0-31 0：该时段不布防；1：该时段布防
+	int schedule_sun_1;		// bit32-63	 
+	int schedule_sun_2;		// bit64-95	 
+	int schedule_mon_0;		// bit0-31
+	int schedule_mon_1;		// bit32-63
+	int schedule_mon_2;		// bit64-95
+	int schedule_tue_0;	 	// bit0-31	 
+	int schedule_tue_1;	 	// bit32-63	 
+	int schedule_tue_2;	 	// bit64-95	 
+	int schedule_wed_0;	 	// bit0-31	 
+	int schedule_wed_1;	 	// bit32-63	 
+	int schedule_wed_2;	 	// bit64-95	 
+	int schedule_thu_0;	  	// bit0-31	 
+	int schedule_thu_1;	 	// bit32-63	 
+	int schedule_thu_2;	 	// bit64-95	 
+	int schedule_fri_0;	  	// bit0-31	 
+	int schedule_fri_1;	 	// bit32-63	 
+	int schedule_fri_2;	 	// bit64-95	 
+	int schedule_sat_0;	  	// bit0-31	 
+	int schedule_sat_1;	 	// bit32-63	 
+	int schedule_sat_2;	 	// bit64-95
+}STRU_NAS_ALARM_PARAM, *PSTRU_NAS_ALARM_PARAM;
+
+/*
+ * 录像参数结果
+ */
+typedef struct tag_STRU_NAS_RECORDSCH_PARAM
+{
+	int cover_enable;					// 表示录像覆盖	0->表示不充许 1->表示充许
+	int time_record_enable;				// 表示定时录像充许位	0->表示不充许 1->表示充许
+	int audio_record_enable;			// 表示定时录像充许位	 0->表示不充许 1->表示充许
+	int camera_record_enable[WVR_CHANNEL_MAX_COUNT];	// 表示摄像头0-3录像允许位	0->表示不充许 1->表示充许
+	int motion_record_enable;							// 表示移动侦测录像充许位	0->表示不充许 1->表示充许
+	int gpio_record_enable;								// 表示GPIO输入报警充许位	0->表示不充许 1->表示充许
+	int time_schedule_enable;							// 表示定时录像使能	  0->表示不充许 1->表示充许
+	int schedule_sun_0;			// 每天按24小时，每小时按15分钟划分为4个布防时段，全天共96个时间段；用12字节表示，每一bit代表一个时间段；
+								// bit0-31 0：该时段不布防；1：该时段布防
+	int schedule_sun_1;			// bit32-63	 
+	int schedule_sun_2;			// bit64-95	 
+	int schedule_mon_0;			// bit0-31
+	int schedule_mon_1;			// bit32-63
+	int schedule_mon_2;			// bit64-95
+	int schedule_tue_0;	 		// bit0-31	 
+	int schedule_tue_1;	 		// bit32-63	 
+	int schedule_tue_2;	 		// bit64-95	 
+	int schedule_wed_0;	 		// bit0-31	 
+	int schedule_wed_1;	 		// bit32-63	 
+	int schedule_wed_2;	 		// bit64-95	 
+	int schedule_thu_0;	  		// bit0-31	 
+	int schedule_thu_1;	 		// bit32-63	 
+	int schedule_thu_2;	 		// bit64-95	 
+	int schedule_fri_0;	  		// bit0-31	 
+	int schedule_fri_1;	 		// bit32-63	 
+	int schedule_fri_2;	 		// bit64-95	 
+	int schedule_sat_0;	  		// bit0-31	 
+	int schedule_sat_1;	 		// bit32-63	 
+	int schedule_sat_2;	 		// bit64-95		
+}STRU_NAS_RECORDSCH_PARAM, *PSTRU_NAS_RECORDSCH_PARAM;
+
+/*
+ *Access point参数
+ */
+typedef struct tag_STRU_NAS_APWIFI_PARAM
+{
+	int enable;			// AP充许位 备注：部分机型起作用 0：禁止 1：启用
+	int encrypt;		// 认证模式	0->WEP-NONE  1->WEP 2->WPA-PSK/AES    3->WPA-PSK/TKIP 4->WPA2-PSK/AES  5->WPA2-PSK/TKIP
+	char ssid[64];		// AP的ssid	最大63个字符
+	char psk[64];		// AP的密码	最大63个字符
+	int channel;		// AP的通道	默认0
+	char ipaddr[32];	// AP的IP地址	默认192.168.246.1
+	char mask[32];		// AP的mask	默认255.255.255.0
+	int mode;
+	char startip[32];	// AP的DHCP服务器的起始地址 	默认192.168.246.2
+	char endip[32]; 	// AP的DHCP服务器的结束地址 	默认192.168.246.250
+}STRU_NAS_APWIFI_PARAM, *PSTRU_NAS_APWIFI_PARAM;
+
+/*
+ * 获取用户权限结构
+ */
+typedef struct tagNasSTRU_LOGIN_PARAM
+{
+	char username[32];		// 当前用户名称	最大31个字符，第1个字符不能为空
+	char password[32];		// 当前密码	最大31个字符，第1个字符不能为空
+	int privilege;			// 当前权限，IE需要根据这个来区分相关的
+							// 访问者，操作者，管理者的访问页面 1：访客 2：操作者 255：管理者
+}STRU_NAS_LOGIN_PARAM, *PSTRU_NAS_LOGIN_PARAM;
+
+
+//--------------add 2014-1-11-----------------
+/*
+ * 录像控制
+ */
+typedef struct tagNasRecordControl {
+	int cmd;			// 录像控制命令
+	int param;			// 录像控制参数
+}STRU_NAS_RECORD_CONTROL, *PSTRU_NAS_RECORD_CONTROL;
+
+/*
+ * WVR挂载摄像机列表
+ */
+struct __NasCamera {
+    char alias[32];							// 摄像头别名	最大32个字符
+    char deviceid[32];						// 摄像头ID号	最大32个字符
+    //unsigned char MacAddr[MAC_ADDR_COUNT];	// 摄像头MAC地址
+	char MacAddr[32];						// 摄像头MAC地址
+    char username[32];						// 摄像头用户名	最大32个字符
+    char password[32];						// 摄像头密码	最大32个字符
+    char host[32];							// 摄像头ip地址
+    int port;								// 摄像头端口号
+    int dhcp_enable;						// 摄像头DHCP开启 0：不启用dhcp 1：启用dhcp 
+    int streamid;							
+};
+
+typedef struct tagNasCameraParam {
+    __NasCamera cameras[WVR_CHANNEL_MAX_COUNT];
+}STRU_NAS_MOUNT_CAMERA_PARAM, *PSTRU_NAS_MOUNT_CAMERA_PARAM;
+
+/*
+ * PPPOE参数
+ */
+typedef struct tagNasPppoeParam {
+	int enable;				// PPPOE充许位	0：禁用  1：启用
+	char username[64];		// PPPOE用户名	最大63个字符
+	char password[64];		// PPPOE密码	最大63个字符
+}STRU_NAS_PPPOE_PARAM, *PSTRU_NAS_PPPOE_PARAM;
+
+/*
+ *pnp服务器参数
+ */
+typedef struct tagNasPnPServerParam {
+	char pnpServer[256];		// p2p服务器地址	最大255个字符
+	int pnpPort;				// p2p的端口	1~65535
+	char pnpUser[64];			// p2p用户名	最大63个字符
+	char pnpPwd[64];			// p2p密码	最大63个字符
+}STRU_NAS_PNPSERVER_PARAM, *PSTRU_NAS_PNPSERVER_PARAM;
+
+/*
+ * wvr搜索局域网内摄像机结果
+ */
+typedef struct tag_STRU_NAS_SEARCH_CAMERA_ITEM
+{
+	char alias[32];						// 摄像头别名	最大32个字符
+	char deviceid[32];					// 摄像头设备ID号	最大32个字符
+	//unsigned char mac[MAC_ADDR_COUNT];	
+	char mac[32];						// 摄像头MAC地址
+	char ipaddr[32];					// 摄像头IP地址
+	int port;							// 摄像头端口号
+	char username[32];					// 摄像头用户名	
+	char password[32];					// 摄像头密码	
+	int dhcp_enable;					// 摄像头DHCP模式 0-disable 1-enable
+	int streamid;						// 0/1/2/3 h264主/h264子码流/mjpeg主/mjpeg子码流
+}STRU_NAS_CAMERA_SEARCH_ITEM,*PSTRU_NAS_CAMERA_SEARCH_ITEM;
+
+#define WVR_SEARCH_CAMERA_RESULT_MAX		32
+typedef struct tag_STRU_NAS_CAMERA_SEARCH_RESULT_LIST
+{
+	int CameraCount;		// 当前搜索到n个camera 0<=n<=32
+	STRU_NAS_CAMERA_SEARCH_ITEM cameras[WVR_SEARCH_CAMERA_RESULT_MAX];
+}STRU_NAS_CAMERA_SEARCH_RESULT_LIST, *PSTRU_NAS_CAMERA_SEARCH_RESULT_LIST;
+
+/*
+ * 设备录像文件结构
+ */
+typedef struct tag_STRU_NAS_RECORD_FILE
+{
+	int nFileCount;         // 总文件数量
+    int nFileNo;            // 当前文件编号	
+    char szFileName[256];		// 录像文件名字
+    int nChannel;				// 录像文件通道号
+    int nFileSize;				// 录像文件大小
+    int nAlarmType;				// 录像文件报警类型
+    int nStartTime;				// 录像文件起始时间
+    int nEndTime;				// 录像文件结束时间
+}STRU_NAS_RECORD_FILE, *PSTRU_NAS_RECORD_FILE;
+
+#define WVR_RECORD_FILE_MAX		 1024
+typedef struct tag_STRU_NAS_RECORD_FILE_LIST
+{
+    int nCount;			// 最多1024个文件
+    STRU_NAS_RECORD_FILE RecordFile[WVR_RECORD_FILE_MAX];
+    
+}STRU_NAS_RECORD_FILE_LIST, *PSTRU_NAS_RECORD_FILE_LIST;
+
+/*
+ * 格式化硬盘
+ */
+typedef struct tagSTRU_NAS_FORMAT_DISK 
+{
+	int InitDisk;		// 重新初始化整个磁盘，自动分区格式化并创建文件	0：不重新初始化磁盘  1：重新初始化磁盘
+	int Partition;		// 对指定分区格式化	0~3
+	int CreateRecordFile;		// 创建视频录像文件	0：不创建文件 1：自动创建128MB文件和索引文件	
+}STRU_NAS_FORMAT_DISK, *PSTRU_NAS_FORMAT_DISK;
+
+
+/*
+ * 录像搜索条件
+ */
+typedef struct _Nas_Search_File_t
+{
+	int partition;
+	int mode;
+	int alarmType;
+	int channel;
+	unsigned int startTime;
+	unsigned int endTime;
+}Nas_Search_File;
+// NAS搜索录像回调
+//typedef void (/*CALLBACK*/ *NasSearchRecordFilesCallBack)(const char *filename, int channel, unsigned int filelen, int alarmType, unsigned int starttime, unsigned int endtime, void *data);
+typedef void (STDCALL *NasSearchRecordFileCallBack)(const STRU_NAS_RECORD_FILE *pRecFile, void *pUser);
+
+#define WVR_PLAYBACK_NORMAL_SPEED	0
+#define WVR_PLAYBACK_2X_SPEED		1
+#define WVR_PLAYBACK_4X_SPEED		2
+#define WVR_PLAYBACK_8X_SPEED		3
+#define WVR_PLAYBACK_STOP			10
+
+/*
+ * 制造厂家参数
+ */
+typedef struct tagWVRFactoryParam
+{
+	char domain_username[64];		// 厂家动态域名用户名	 
+	int domain_status;				// 厂家域名状态	 
+	char domain_server[64];			// 厂家动态域名地址	 
+	int domain_port;				// 厂家动态域名端口	 
+	char domain_password[64];		// 厂家动态域名密码，需要管理者权限	 
+	int domain_mode;				// 某些厂家域名模式	 
+	int index;						// 厂家序列号	 
+	int heatbeat;					// 厂家动心跳间隔
+	
+/*	
+	wifimac	wifi的MAC地址	 
+mac	mac地址	 
+server 	厂家域名服务器	 
+username	厂家域名账号	 
+userpwd	厂家域名密码	 
+port	域名端口	 
+ alarm_sever	 	 
+heartbeat 	心跳间隔 	 
+serviceindex / factory_index	厂家域名序列号	 
+mode	部分dns的模式	 
+pnpserver	p2p的server 	 
+pnpport 	p2p的端口	 
+deviceid	设备ID  小于64字符
+*/
+}STRU_WVR_FACTORY_PARAM, *PSTRU_WVR_FACTORY_PARAM;
+
+/*
+ * 应用固件版本
+ */
+typedef struct tagWVRAppVersion
+{
+	char app_version[16];			// 应用固件版本号
+}STRU_WVR_APP_VERSION, *PSTRU_WVR_APP_VERSION;
+
+#if 0		// 停用
+/*
+ * 对码状态参数
+ */
+#define WVR_ALARM_STUDY_STATUS_MAX		16 
+typedef struct tagWVRAlarmStudy
+{
+	int study_status[WVR_ALARM_STUDY_STATUS_MAX]; 	// 传感器对码状态	 0:未完成对码 1：已完成对码
+							// 0：遥控上锁键
+							// 1：遥控解锁键
+							// 2：遥控铃声键
+							// 3：遥控启动键
+							// 4：门磁
+							// 5：烟感
+							// 6：红外人体感应
+							// 7：气感
+							// 8-15：保留
+}STRU_WVR_ALARM_STUDY, *PSTRU_WVR_ALARM_STUDY;
+#endif
+
+/*
+ * 获取报警对码列表
+ */
+typedef struct tagSTRU_WVR_ALARM_DEVICE_CODE_STATUS {	
+	int alarmCam;		// 表示当前状态：0->表示是否启用 1->表示正在校码 2->表示可以正常使用
+	char alarmKey[32];	// 表示保存的无线码
+	int alarmPtz;		// 表示是否启用了预置位
+}STRU_WVR_ALARM_DEVICE_CODE_STATUS;
+
+#define MAX_ALARM_DEVICE_SCENE		8
+#define MAX_ALARM_DEVICE_ITEM		4
+typedef struct tagSTRU_WVR_ALARM_DEVICE_LIST {
+	STRU_WVR_ALARM_DEVICE_CODE_STATUS	list[MAX_ALARM_DEVICE_SCENE][MAX_ALARM_DEVICE_ITEM];
+	int alarm_audio[MAX_ALARM_DEVICE_SCENE];		// 报警声音状态 0/1:关闭/打开报警声音
+	int zone_arming;								// 布防 0/1:撤防/布防
+	int alarm_link_channel[MAX_ALARM_DEVICE_SCENE];	// 各区域报警联动视频通道号
+}STRU_WVR_ALARM_DEVICE_CODE_LIST;
+
+/*
+ * 报警对码设置
+ */
+typedef struct tagSTRU_WVR_ALARM_DEVICE_CODE {
+	int zone;		// 报警类型	0-7
+	int sit;		// 同类型的报警个数	0-3
+	int clearAll;	// 0/1:设置/清除全部
+}STRU_WVR_ALARM_DEVICE_CODE, *PSTRU_WVR_ALARM_DEVICE_CODE;
+
+
+// 录像播放
+typedef struct tagNasRecordFilePlay {
+	int partition;			// 分区
+	char szFilename[128];	// 播放文件名
+	int filesize;			// 文件大小
+	int pos;				// 播放位置
+	int mode;				// 播放模式 0->正常速度播放 1->2倍速度播放 2->4倍速度播放 3->8倍速度播放 10->停止播放
+}NasPlayRecordFile;
+
+/*
+ * 摄像头视频控制
+ */
+typedef struct tag_STRU_WVR_CAMERA_CONTROL
+{
+	int channel;	// 通道号 
+	int param;		// 1/2/8/9 亮度/对比度/饱和度/色度 (0-255)
+	int value;
+}STRU_WVR_CAMERA_CONTROL, *PSTRU_WVR_CAMERA_CONTROL;
+
+/*
+ * 设置433报警模块
+ * 布防:command=10 value=0
+ * 撤防:command=11 value=0
+ * 设置0-7区域的报警联动视频通道 command=20-27 value=0-3
+ * 设置报警联动预置点(目前未使用) command=30-61
+ */
+typedef struct tagSTRU_WVR_ALARM_MODULE_CONTROL {
+	int command;		
+	int value;	
+}STRU_WVR_ALARM_MODULE_CONTROL, *PSTRU_WVR_ALARM_MODULE_CONTROL;
+
+// IOS 推送设置结构
+typedef struct tagSTRU_WVR_IOS_PUSH_PARAM{
+    char token[96];
+    int ID;
+    int other;
+}STRU_WVR_IOS_PUSH_PARAM;
+
+// --------------------------------------智能开关部分----------------------------------------------------
+typedef struct tagSmartPlugRelay {
+	int status;		// 0/1: 关闭/打开
+}SmartPlugRelay;
+
+typedef struct tagSmartPlugTaskSchedule {
+	int used;		// 是否使用
+	int enable;		//0：关闭；1：开启（第一条，下同）
+	int starttime;	// 0~86400：零点开始的秒数
+	int endtime;	// 0~86400：零点开始的秒数
+	int mon;		// 0：不重复  1：重复（即每个星期一该时间段都生效，下同）
+	int tue;		// 0：不重复  1：重复
+	int wed;		// 0：不重复  1：重复
+	int thu;		// 0：不重复  1：重复
+	int fri;		// 0：不重复  1：重复
+	int sat;		// 0：不重复  1：重复
+	int sun;		// 0：不重复  1：重复
+}SmartPlugTaskSchedule;
+
+// 任务列表
+typedef struct tagSmartPlugTaskScheduleList {
+	SmartPlugTaskSchedule task[8];
+	int count;
+}SmartPlugTaskScheduleList;
+
+// 设置任务
+typedef struct tagSmartPlugTaskItem {
+	int enable;			// 0：关闭；1：开启
+	int number;			// 0-7 序列号
+	int starttime;		// 0~86400：从零点开始的秒数
+	int endtime;		// 0~86400：从零点开始的秒数
+	int mon;			// 0：不重复  1：重复（即每个星期一该时间段都生效，下同）
+	int tue;
+	int wed;
+	int thu;
+	int fri;
+	int sat;
+	int sun;
+	int used;			// 0:删除   1：添加
+}SmartPlugTaskItem;
+
+typedef struct tagSmartPlugTaskDelay {
+	int enable;		// 0/1: 关闭/开启
+	int minute;		// 0~2880：延时还剩多长时间
+}SmartPlugTaskDelay;
+
+typedef struct tagSmartPlugKey {
+	char key[8];
+}SmartPlugKey;
+
+// 发送直连命令后返回ssid
+typedef struct tagSmartPlugDirectConnect {
+	char ssid[32];
+}SmartPlugDirectConnect;
+//--------------------------------------只能开关 end---------------------------------
+
+#endif

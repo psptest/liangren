@@ -59,7 +59,8 @@ NSString * const CurrentHouseDefaultKey = @"CurrentHouseDefaultKey";
 }
 //增加房子 命名方式自动加1 增加房子并没有判断对应地址是否有房子 应该是无则才增加
 - (void)addWithAddress:(NSString *)address {
-    NSString * name = [NSString stringWithFormat:@"%@ %d",@"House",(int)[self houseArray].count + 1];
+    
+    NSString * name = [NSString stringWithFormat:@"%@ %d",NSLocalizedString(@"House", nil),(int)[self houseArray].count + 1];
     HouseModel *house = [[HouseModel alloc] init];
     //根据self houseArray 的count +1 命名house.name 并传值house.address
     house.name = name;

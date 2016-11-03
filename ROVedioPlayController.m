@@ -111,13 +111,17 @@ typedef enum : NSUInteger {
         }
     }];
     
+    
     [self.view addSubview:self.topView];
     [self.view addSubview:self.bottomView];
     
     [self createControlBtns];
+    
     [self.view addGestureRecognizer:self.tapGesture];
     
     [self showPlayControlButton];
+    
+    [self judgeFlipButtonsStatus];
     
     // 刚开始取消视图的点击事件
    // self.bottomView.userInteractionEnabled = NO;
@@ -412,13 +416,13 @@ typedef enum : NSUInteger {
 {
     
     // 将按钮的点击事件打开
-     dispatch_async(dispatch_get_main_queue(), ^{
+   //  dispatch_async(dispatch_get_main_queue(), ^{
          
          self.bottomView.userInteractionEnabled = YES;
          
          //当前视图开始播放
          [self showPlayControlButton];
-   });
+  // });
     
     
     UIButton * HorizontalBtn = (UIButton *)[self.view viewWithTag:100+kLeftBtn];
@@ -506,6 +510,8 @@ typedef enum : NSUInteger {
         
         [self.bottomView addSubview:btn];
     }
+    
+    
 }
 - (UIImageView *)topView {
     if (!_topView) {
@@ -536,6 +542,7 @@ typedef enum : NSUInteger {
     }
     return _bottomView;
 }
+
 
 -(UIButton *)backBtn{
     if(!_backBtn){

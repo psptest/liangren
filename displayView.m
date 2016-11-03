@@ -14,15 +14,17 @@
 #import "UIColor+Hex.h"
 #import "UIImageView+imageSizeOperation.h"
 
+
 #define kSlideViewToBottom 11
 #define kSlideViewSize CGSizeMake(30, 22)
 #define kStep 10
 
 @interface displayView ()
+
 @property(nonatomic,weak)UIImageView *imgView;
 @property(nonatomic,strong)UIView *slideView;
 @property(nonatomic,strong)UIView *nextSliderView;
-@property(nonatomic,assign)CGRect originalFrame;
+
 @property(nonatomic,strong)AnimationDashImageView *anim;
 @property(nonatomic,strong)NSMutableArray *imagesData;
 @property(nonatomic,strong)NSMutableArray *instrusionData;
@@ -33,50 +35,14 @@
 {
     CGRect _oriFrame;
 }
-
--(NSMutableArray *)instrusionData
-{
-    if (_instrusionData == nil) {
-        _instrusionData = [[NSMutableArray alloc]init];
-        
-        for (NSInteger i =0; i<9; i++) {
-            NSString *imageName = [NSString stringWithFormat:@"ic_dashboard_intrusion0%ld",i+1];
-            UIImage *image = [UIImage imageNamed:imageName];
-            [_instrusionData addObject:image];
-        }
-    }
-    return _instrusionData;
-}
--(NSMutableArray *)imagesData
-{
-    if (_imagesData == nil) {
-        _imagesData = [[NSMutableArray alloc]init];
-        
-        for (NSInteger i =0; i<9; i++) {
-            NSString *imageName = [NSString stringWithFormat:@"ic_dashboard_ok0%ld",i+1];
-            UIImage *image = [UIImage imageNamed:imageName];
-            [_imagesData addObject:image];
-        }
-    }
-    return _imagesData;
-}
-
--(CGRect)originalFrame
-{
-    _originalFrame = CGRectMake(kSelfWidth, kSelfHeight-kSlideViewSize.height, kSelfWidth/2.0f, kSlideViewSize.height);
-    
-    return _originalFrame;
-}
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // [self createAnimationView:kImagesOk];
+        
         _oriFrame = frame;
-        //滑动动画暂时删除
-        // [self createTimer];
-      //  [self createSlideView];
         self.backgroundColor = kDarkBackgroudColor;
+        [self addParamsViews];
     }
     return self;
 }
@@ -86,20 +52,12 @@
     self.autoresizesSubviews = YES;
     self.anim = [AnimationDashImageView animationViewWithImages:self.imagesData];
     
-  //   UIImage * image = [UIImageView newImageWithName:@"newBack" CGSize:CGSizeMake(self.frame.size.height*1.692, self.frame.size.height)];
-   // UIColor *back_Color = [UIColor colorWithPatternImage:image];
-  //  self.backgroundColor = back_Color;
-    UIImage *image = [UIImage imageNamed:@"newBack"];
-    self.image = image;
+    self.image = [UIImage imageNamed:@"newBack"];
     
-#if 0
-    UIViewContentModeScaleToFill,
-    UIViewContentModeScaleAspectFit,      // contents scaled to fit with fixed aspect. remainder is transparent
-    UIViewContentModeScaleAspectFill,
-#endif
     self.contentMode = UIViewContentModeScaleAspectFill;
     
     if (imagesType == kImagesIntrusion) {
+        
         self.anim = [AnimationDashImageView animationViewWithImages:self.instrusionData];
         [self layoutSubviews];
         self.backgroundColor = kMainRedColor;
@@ -107,96 +65,48 @@
     
     CGFloat disHeight = CGRectGetHeight(_oriFrame);
     CGFloat disWidth = CGRectGetWidth(_oriFrame);
-    //  CGFloat ratio = CGRectGetWidth(self.anim.frame)/CGRectGetHeight(self.anim.frame);
-   CGFloat height = disHeight*0.4f;
-  //  MYLog(@"%f",height);
+    CGFloat height = disHeight*0.4f;
     CGFloat width = height;
     
     self.anim.frame = CGRectMake(disWidth/2.0f-width/2.0, disHeight/2.0f-height/2.0f, width, height);
     
     [self addSubview:self.anim];
     
-    self.anim.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+  //  self.anim.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
     [self.anim startAnimating];
     
 }
--(void)layoutSubviews
+-(void )addParamsViews
 {
-   
+    _humiView = [[ROParamsView alloc] initWithImage:[UIImage imageNamed:@"ic_humiture_nowork_device_"] contents:@"???"];
+    _humiView.center = CGPointMake(CGRectGetWidth(self.bounds)*0.25-20, CGRectGetHeight(self.bounds)*(2/3.0));
+    
+    [self addSubview:_humiView];
+    
+    _tempView = [[ROParamsView alloc] initWithImage:[UIImage imageNamed:@"ic_humiture_nowork_device_"] contents:@"???"];
+    _tempView.center = CGPointMake(CGRectGetWidth(self.bounds)*0.75+20, CGRectGetHeight(self.bounds)*(2/3.0));
+    
+    [self addSubview:_tempView];
+    
+    _sunyView = [[ROParamsView alloc ]initWithContents:@"Sunny"];
+    _sunyView.center = CGPointMake(CGRectGetWidth(self.bounds)*0.25-10, CGRectGetHeight(self.bounds)*(1/3.0));
+    
+    [self addSubview:_sunyView];
+    
+    
+    _PMView = [[ROParamsView alloc ] initWithContents:@"PM2.5 0000"];
+    _PMView.center = CGPointMake(CGRectGetWidth(self.bounds)*0.75+10, CGRectGetHeight(self.bounds)*(1/3.0));
+    
+    [self addSubview:_PMView];
+    
 }
--(UILabel *)getLabelWithText:(NSString *)text
-{
-    UILabel *PMLabel = [[UILabel alloc]init];
-    PMLabel.text = text;
-    PMLabel.textColor = kDarkBackgroudColor;
-    return PMLabel;
-}
--(UIView *)slideViewWithFrame:(CGRect)frame PM:(NSString *)PM temp:(NSString *)temp
-                         humi:(NSString *)humi
-{
-    UIView *slide = [[UIView alloc]initWithFrame:frame];
-    
-    UILabel *PMLabel = [self getLabelWithText:PM];
-    [slide addSubview:PMLabel];
-    
-    UILabel *tempLabel = [self getLabelWithText:temp];
-    [slide addSubview:tempLabel];
-    
-    UILabel *humiLabel = [self getLabelWithText:humi];
-    [slide addSubview:humiLabel];
-    
-    PMLabel.frame = CGRectMake(0, 0,kSlideViewSize.width,CGRectGetHeight(frame));
-    
-    tempLabel.frame = CGRectMake(CGRectGetWidth(frame)/2.0-kSlideViewSize.width/2.0f,0, 30, 22);
-    
-    humiLabel.frame = CGRectMake(CGRectGetWidth(frame)-kSlideViewSize.width, 0,30, 22);
-    return slide;
-}
--(void )createSlideView
-{
-    self.slideView = [self slideViewWithFrame:self.originalFrame PM:@"40" temp:@"23" humi:@"69"];
-    [self addSubview:self.slideView];
-    
-    self.nextSliderView = [self slideViewWithFrame:self.originalFrame PM:@"40" temp:@"23" humi:@"69"];
-    
-    [self addSubview:self.nextSliderView];
-    // self.slideView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-    //self.nextSliderView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-}
-
 -(void)setAnimationViewFrame:(CGRect)frame
 {
     if (frame.origin.y> 0) {
         
         self.anim.frame = frame;
     }
-}
-#pragma mark - 创建timer动画
--(void)step
-{
-    CGFloat midX = CGRectGetMidX(self.slideView.frame);
-    midX -= kStep;
-    self.slideView.center = CGPointMake(midX,kSelfHeight-kSlideViewSize.height/2.0f);
-    //如果slideViewminx<0 则nextView开始移动
-    if (CGRectGetMinX(self.slideView.frame)<0) {
-        self.nextSliderView.center = CGPointMake(midX+kSelfWidth, kSelfHeight-kSlideViewSize.height/2.0f);
-        //如果nextView的max<0 则将slide next复归到原始位置
-        if (CGRectGetMaxX(self.nextSliderView.frame)<0) {
-            self.slideView.frame = self.originalFrame;
-            self.nextSliderView.frame = self.originalFrame;
-        }
-    }
-}
--(void)createTimer
-{
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(step) userInfo:nil repeats:YES];
-    self.timer = timer;
-    [self.timer fire];
-}
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"the display view s frame is %@", NSStringFromCGRect(self.frame)];
 }
 
 #pragma mark - 刷新动图
@@ -217,6 +127,35 @@
             break;
     }
 }
+
+-(NSMutableArray *)instrusionData
+{
+    if (_instrusionData == nil) {
+        _instrusionData = [[NSMutableArray alloc]init];
+        
+        for (NSInteger i =0; i<9; i++) {
+            NSString *imageName = [NSString stringWithFormat:@"ic_dashboard_intrusion0%ld",i+1];
+            UIImage *image = [UIImage imageNamed:imageName];
+            [_instrusionData addObject:image];
+        }
+    }
+    return _instrusionData;
+}
+
+-(NSMutableArray *)imagesData
+{
+    if (_imagesData == nil) {
+        _imagesData = [[NSMutableArray alloc]init];
+        
+        for (NSInteger i =0; i<9; i++) {
+            NSString *imageName = [NSString stringWithFormat:@"ic_dashboard_ok0%ld",i+1];
+            UIImage *image = [UIImage imageNamed:imageName];
+            [_imagesData addObject:image];
+        }
+    }
+    return _imagesData;
+}
+
 -(void)refreshAnimationViewWithFrame:(CGRect)frame
 {
     self.anim.frame = frame;

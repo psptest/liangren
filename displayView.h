@@ -7,16 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ROParamsView.h"
 @class AnimationDashImageView;
 
 typedef enum : NSUInteger {
     kImagesOk = 100,
     kImagesIntrusion
 } kImagesType;
+
 @interface displayView : UIImageView
 
-@property(nonatomic,weak)NSTimer *timer;
--(void)refreshAnimationViewWithTag:(kImagesType)imagesType;
+@property(nonatomic,strong)ROParamsView *humiView;
+@property(nonatomic,strong)ROParamsView *tempView;
+@property(nonatomic,strong)ROParamsView *sunyView;
+@property(nonatomic,strong)ROParamsView *PMView;
+
 -(void)refreshAnimationViewWithFrame:(CGRect )frame;
+
+-(void)refreshAnimationViewWithTag:(kImagesType)imagesType;
+
 
 @end

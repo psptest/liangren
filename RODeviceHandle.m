@@ -9,9 +9,7 @@
 #import "RODeviceHandle.h"
 #import "GTMBase64.h"
 #import "prefrenceHeader.h"
-
-#define kNotificationName @"notificationName"
-#define kUserInfo @"userInfo"
+#import "DeviceModel.h"
 
 @implementation RODeviceHandle
 
@@ -19,14 +17,14 @@
 typedef enum : NSUInteger {
     // zigbee
     
-    kDeviceUnknown,
+    kDeviceUnknowns,
     kDeviceOnOrOff,
-    kDeviceSensor,
+    kDeviceOrdinarySensor,
     kDeviceTemperature,
     kDeviceHumidity,
     kDeviceGroup,
     
-    kDeviceCamera,
+    kDeviceCameras,
     
     // z_wave
     kZwaveDoor,
@@ -42,35 +40,39 @@ typedef enum : NSUInteger {
 } kDeviceID;
 
 static RODeviceHandle * _deviceHandle = nil;
+
 + (instancetype)sharedDeviceHandle {
 
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             _deviceHandle = [[RODeviceHandle alloc] init];
+            
         });
         return _deviceHandle;
 }
 
+
+-(NSDictionary *)statusDictionaryWithModel:(DeviceModel *)device
+{
+    NSInteger dev_id = device.dev_id;
+    NSArray *status = device.status;
+    
+    NSDictionary *dict = nil;
+    if (status) {
+        
+        dict = @{@"dev_id":@(dev_id),@"status":status};
+    
+    }else
+    {
+        dict = @{@"dev_id":@(dev_id),@"status":@[]};
+
+    }
+    
+    return dict;
+}
+
 -(NSDictionary *)StatusOrEventWithObject:(NSDictionary *)object
 {
-    
-//    "dev_id" = 12;
-//    status =             (
-//                          {
-//                              id = 2;
-//                              params = "HgAAAA==";
-//                          },
-//                          {
-//                              id = 4;
-//                              params = "Gws=";
-//                          },
-//                          {
-//                              id = 3;
-//                              params = "O08=";
-//                          }
-//                          );
-//}
-//);
     
     NSDictionary *dic = nil;
     
@@ -84,26 +86,63 @@ static RODeviceHandle * _deviceHandle = nil;
             
             return nil;
             
-        }else if (idCounts == 1)
+        }else
         {
-            // 普通的sensor or control
-            NSInteger deviceID = [object[@"dev_id"] integerValue];
-            NSNumber *idNumber = status[0][@"id"];
-            NSString *parString = [status[0][@"params"] substringToIndex:2];
+            for (NSDictionary *dict in status) {
+                
+//                if ([dict.allValues containsObject:@(kDeviceTemperature)] || [dict.allValues con]) {
+//                    <#statements#>
+//                }
+                if ([dict[@"id"] isEqualToNumber:@(kDeviceTemperature)]||[dict[@"id"] isEqualToNumber:@(kDeviceTemperature)]) {
+                    
+                    dic = [self packageTempatureAndHumidityWithDictionary:object];
+                    
+                }
+                if ([dict[@"id"] isEqualToNumber:@(kDeviceOnOrOff)]||[dict[@"id"] isEqualToNumber:@(kDeviceOrdinarySensor)]) {
+                    
+                        // 普通的sensor or control
+                        NSInteger deviceID = [object[@"dev_id"] integerValue];
+                        NSNumber *idNumber = status[0][@"id"];
+                        NSString *parString = [status[0][@"params"] substringToIndex:2];
+                    
+                        dic = [self packageDictionaryWithIDNumber:idNumber params:parString deviceID:deviceID];
+                    
+                }
             
-            dic = [self packageDictionaryWithIDNumber:idNumber params:parString deviceID:deviceID];
+            }
             
-        }else if (idCounts == 3){
             
-            //判断不一定准确 之后再判断
-            dic = [self packageTempatureAndHumidityWithDictionary:object];
-        
         }
+        
+//        else if (idCounts == 1)
+//        {
+//            // 普通的sensor or control
+//            NSInteger deviceID = [object[@"dev_id"] integerValue];
+//            NSNumber *idNumber = status[0][@"id"];
+//            NSString *parString = [status[0][@"params"] substringToIndex:2];
+//            
+//            dic = [self packageDictionaryWithIDNumber:idNumber params:parString deviceID:deviceID];
+//            
+//        }else if (idCounts == 3){
+//            
+//            //判断不一定准确 之后再判断
+//            dic = [self packageTempatureAndHumidityWithDictionary:object];
+//        
+//        }
         
     }
     
     return dic;
     
+}
+
+-(NSDictionary *)StatusOrEventWithModel:(DeviceModel *)device
+{
+    NSDictionary *dict = [self statusDictionaryWithModel:device];
+    
+    NSDictionary *diction = [self StatusOrEventWithObject:dict];
+    
+    return diction;
 }
 
 #pragma mark - 打包数据传送
@@ -129,19 +168,25 @@ static RODeviceHandle * _deviceHandle = nil;
         }
     }
     
-    NSDictionary *dict = nil;
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionary];
     
-    if (temp && humi) {
+    [mutDic setObject:@(deviceID) forKey:@"dev_id"];
+    
+    if (temp ) {
         
-        NSDictionary *userInfo = @{@"idNumber":@(deviceID),@"temp":temp,@"humi":humi};
-        
-        dict = @{kNotificationName:NOTIFICATION_TEM_HUM,kUserInfo:userInfo};
-        
-        return dict;
+        [mutDic setObject:temp forKey:@"temp"];
+      //  NSDictionary *userInfo = @{@"idNumber":@(deviceID),@"temp":temp,@"humi":humi};
     
     }
     
-    return nil;
+    if (humi) {
+        [mutDic setObject:humi forKey:@"humi"];
+    }
+    
+    NSDictionary *dict = @{NOTIFICATION_NAME:NOTIFICATION_TEM_HUM,USER_INFO:[mutDic copy]};
+    
+    
+    return dict;
 }
 
 //普通设备
@@ -150,13 +195,13 @@ static RODeviceHandle * _deviceHandle = nil;
     NSString *notificationName = nil;
     
     switch ([idNumber integerValue]) {
-        case kDeviceUnknown:
+        case kDeviceUnknowns:
             return nil;
             break;
         case kDeviceOnOrOff:
             notificationName =  NOTIFICATION_ON_OR_OF;
             break;
-        case kDeviceSensor:
+        case kDeviceOrdinarySensor:
             notificationName =  NOTIFICATION_ORDINARY_SENSOR;
             break;
             
@@ -168,7 +213,7 @@ static RODeviceHandle * _deviceHandle = nil;
     
     NSDictionary *userInfo = @{@"idNumber":idNumber,@"params":parString,@"dev_id":@(deviceID)};
     
-    NSDictionary *diction = @{kNotificationName:notificationName,kUserInfo:userInfo};
+    NSDictionary *diction = @{NOTIFICATION_NAME:notificationName,USER_INFO:userInfo};
     
     return diction;
 }
@@ -176,19 +221,29 @@ static RODeviceHandle * _deviceHandle = nil;
 
 -(NSString *)temperAndHumityWithParams:(NSString *)params
 {
+    
+//},
+//{
+//    id = 4;
+//    params = "HTs=";
+//},
+//{
+//    id = 3;
+//    params = "NmE=";
+//}
 
-    NSData *data = [GTMBase64 decodeString:params];
-    
+NSData *data = [GTMBase64 decodeString:params];
+
     Byte *testByte = (Byte *)[data bytes];
-    
-#if 0
+
+
     for(int i=0;i<[data length];i++){
         
         printf("testByte = %d\n",testByte[i]);
     }
-#endif
+
     
-    NSMutableString *mut = [NSMutableString stringWithFormat:@"%c.%c",testByte[0],testByte[1]];
+    NSMutableString *mut = [NSMutableString stringWithFormat:@"%d.%d",testByte[0],testByte[1]];
     
     return  [mut copy];
     
@@ -202,22 +257,5 @@ static RODeviceHandle * _deviceHandle = nil;
     
 }
 
-
-//{
-//    "dev_id" = 11;
-//    status =             (
-//                          {
-//                              id = 2;
-//                              params = "HgAAAA==";
-//                          },
-//                          {
-//                              id = 4;
-//                              params = "HiU=";
-//                          },
-//                          {
-//                              id = 3;
-//                              params = "RWI=";
-//                          }
-//                          );
 
 @end

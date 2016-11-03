@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ios_client/!svn/ver/253/HSLCam/trunk/HSLCam/HSLCam/HSLSDK/inc
+END
+NasDefine.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ios_client/!svn/ver/254/HSLCam/trunk/HSLCam/HSLCam/HSLSDK/inc/NasDefine.h
+END
+NasClientNetLib.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/ios_client/!svn/ver/243/HSLCam/trunk/HSLCam/HSLCam/HSLSDK/inc/NasClientNetLib.h
+END
+CameraDefine.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ios_client/!svn/ver/219/HSLCam/trunk/HSLCam/HSLCam/HSLSDK/inc/CameraDefine.h
+END
+CommonDefine.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ios_client/!svn/ver/253/HSLCam/trunk/HSLCam/HSLCam/HSLSDK/inc/CommonDefine.h
+END
+IPCClientNetLib.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/ios_client/!svn/ver/243/HSLCam/trunk/HSLCam/HSLCam/HSLSDK/inc/IPCClientNetLib.h
+END

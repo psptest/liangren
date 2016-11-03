@@ -124,7 +124,7 @@
 "House_Existed" = "Такой дом уже есть!";
 "Something_Wrong_QR" = "Сбой при добавлении!";
 "House_Added" = "智能家居网关添加成功";
-
+"House" = "智能家居网关";
 //AddHouseViewController
 "Add_New_Home" =  "Добавить дом";
 "Scan_QRCode" = "Просканируйте QR-код на Вашем смартфоне";

@@ -66,6 +66,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceListHaveUpdated) name:kNotification_deviceListUpdated object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceStatusHaveChanged:) name:kNotification_controlDevice object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusListUpdated:) name:knotification_statusList object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceEdited:) name:kNotification_deviceEditted object:nil];
@@ -240,12 +241,10 @@
     }
     
     
-    // 判断特殊设备
-    [self judgeParticularDevices:mod];
+   
     
     if (!_isSetting) {
         
-        //非设置界面 button可点击
         deviceCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"reuse"];
         
         cell.delegate = self;
@@ -356,7 +355,7 @@
 //                              params = "O08=";
 //                          }
 //                          );
-#if 0
+
     if ([diction[@"status"] count] != 0) {
         
         if ([diction[@"status"][0][@"id"] isEqual:@(1)]) {
@@ -376,7 +375,7 @@
         [self resumeDeviceUI];
     }
     }
-#endif
+    
     
     NSDictionary *dict = [[RODeviceHandle sharedDeviceHandle ] StatusOrEventWithObject:diction];
     
@@ -385,11 +384,14 @@
     
     if ([notificationName isEqualToString:NOTIFICATION_ON_OR_OF]) {
         
-        [self RefreshDeviceUIWithDictionary:userInfo dev_mode:1];
+       // [self RefreshDeviceUIWithDictionary:userInfo dev_mode:1];
         
     }else if ([notificationName isEqualToString:NOTIFICATION_ORDINARY_SENSOR])
     {
-        [self RefreshDeviceUIWithDictionary:userInfo dev_mode:0];
+       // [self RefreshDeviceUIWithDictionary:userInfo dev_mode:0];
+    }else if ([notificationName isEqualToString:NOTIFICATION_TEM_HUM]){
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:userInfo];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_deviceChanged object:nil];
@@ -492,8 +494,6 @@
     self.dataList = [NSMutableArray arrayWithArray:[[fileOperation sharedOperation] getDevices]];
     
     [self createModelWithDevices:self.dataList];
-    
-    
     //刷新数据
     [self.tableView reloadData];
     
@@ -508,13 +508,21 @@
     
     [self createModelWithDevices:self.dataList];
     [self.tableView reloadData];
-
+    
 }
 #pragma mark - 设备处理
 -(void )judgeParticularDevices:(DeviceModel *)device
 {
     if ([device.dev_type isEqualToString:@"A010403020000"]) {
+        //温湿度
+       NSDictionary *tempParams = [[RODeviceHandle sharedDeviceHandle] StatusOrEventWithModel:device];
+        NSString *notificationName = tempParams[NOTIFICATION_NAME];
+        NSDictionary *userInfo = tempParams[USER_INFO];
         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             
+            [[NSNotificationCenter defaultCenter ] postNotificationName:notificationName object:userInfo];
+         });
     }
 
 }
@@ -557,11 +565,10 @@
         
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([(DeviceModel *)obj dev_id] == [diction[@"dev_id"] integerValue]) {
-//                id = 2;
-//                params = "AQAAEA==";
-                NSDictionary *dic = @{@"id":@(1),@"params":diction[@"params"]};
                 
-                ((DeviceModel *)mut[idx]).status = @[dic];
+              //  NSDictionary *dic = @{@"id":diction[@"idNumber"],@"params":diction[@"params"]};
+                
+                ((DeviceModel *)mut[idx]).status = diction[@"status"];
                 row = idx;
                 *stop = YES;
             }
@@ -575,6 +582,7 @@
 
 -(void )resumeDeviceUI
 {
+    
  // 之后需要将Infrade_sensor——Z_Wave恢复
 #if 0
     {
