@@ -8,11 +8,11 @@
 
 #import "AddViewController.h"
 @class HouseModel;
+
 @interface SetHomeViewController : AddViewController
-
-
 
 -(instancetype )initWithIndex:(NSIndexPath *)index;
 
 -(instancetype )initWithHome:(HouseModel *)house;
+
 @end

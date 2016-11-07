@@ -33,6 +33,7 @@
 
 
 - (MBProgressHUD *)hubView {
+    
     if (!_hubView) {
         
         if (self.view.window) {

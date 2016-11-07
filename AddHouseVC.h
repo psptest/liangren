@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol AddHouseVCDelegate <NSObject>
--(void )AddHouseComplished;
-@end
+
 @interface AddHouseVC : UIViewController
 
-@property(nonatomic,weak) id<AddHouseVCDelegate> delegate;
 @end

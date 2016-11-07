@@ -80,18 +80,20 @@ NSString * const CurrentHouseDefaultKey = @"CurrentHouseDefaultKey";
 - (void)removeWithHouse:(HouseModel *)houseModel {
     
   //  NSAssert(houseModel, @"houseModel 不能为nil");
+    
     [[self houseArray] removeObject:houseModel];
     
-//    if ([houseModel.address isEqualToString:self.currentHouse.address]) {
-//        if (self.houseArray.count > 0) {
-//            self.currentHouse = self.houseArray[0];
-//        } else {
-//            self.currentHouse = nil;
-//        }
-//        [self synchronizeCurrentHouse];
-//    }
+    if ([houseModel.address isEqualToString:self.currentHouse.address]) {
+        if (self.houseArray.count > 0) {
+            self.currentHouse = self.houseArray[0];
+        } else {
+            self.currentHouse = nil;
+        }
+        
+       // [self synchronizeCurrentHouse];
+    }
     
-    NSString *address = houseModel.address;
+  //  NSString *address = houseModel.address;
     
     [self synchronizeHouse];
 }

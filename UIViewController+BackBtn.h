@@ -11,4 +11,6 @@ typedef void(^buttonClickBlock)();
 @interface UIViewController (BackBtn)
 
 - (void)addBackBtn:(NSString *)title;
+
+- (void)leftBtnClick:(id)sender;
 @end
