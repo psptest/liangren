@@ -22,6 +22,7 @@
 //#import "prefrenceHeader.h"
 //#import "P2Phandle.h"
 #import "SvUDIDTools.h"
+#import "RONetworking.h"
 
 #import "HSLSDK/inc/IPCClientNetLib.h"
 #import "HSLSDK/inc/StreamPlayLib.h"
@@ -40,6 +41,8 @@
 @property (strong , nonatomic) CLLocationManager *location;
 @property(nonatomic,assign)BOOL isBackground;
 
+
+// appkey 天气  0c6b360f0abad0ff4a72a707bd49bf83
 @end
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -54,6 +57,8 @@
     //连接房子
     [self connectP2P];
     
+    [self requestPM];
+    
     // 实例化视频播放实例
     device_net_work_init("");
     x_player_initPlayLib();
@@ -61,42 +66,42 @@
     //实例化消息监听器
     [socketReader sharedReader];
     
-#if 0
-    //暂时不用
-    if ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
-        [application registerUserNotificationSettings:settings];
-    }
-    
-    // 本地通知
-    [application setApplicationIconBadgeNumber:0];
-    
-#endif
-    
-#if 0
-    // 暂时不用
-    _task = [BGTask shareBGTask];
-    UIAlertView *alert;
-    
-
-    //判断定位权限
-    if([UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusDenied)
-    {
-        alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"应用没有不可以定位，需要在在设置/通用/后台应用刷新开启" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else if ([UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusRestricted)
-    {
-        alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"设备不可以定位" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-    }
-    else
-    {
-        self.bgLocation = [[BGLogation alloc]init];
-        [self.bgLocation startLocation];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(log) userInfo:nil repeats:YES];
-    }
-#endif
+//#if 0
+//    //暂时不用
+//    if ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0) {
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+//        [application registerUserNotificationSettings:settings];
+//    }
+//    
+//    // 本地通知
+//    [application setApplicationIconBadgeNumber:0];
+//    
+//#endif
+//    
+//#if 0
+//    // 暂时不用
+//    _task = [BGTask shareBGTask];
+//    UIAlertView *alert;
+//    
+//
+//    //判断定位权限
+//    if([UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusDenied)
+//    {
+//        alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"应用没有不可以定位，需要在在设置/通用/后台应用刷新开启" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//    }
+//    else if ([UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusRestricted)
+//    {
+//        alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"设备不可以定位" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//    }
+//    else
+//    {
+//        self.bgLocation = [[BGLogation alloc]init];
+//        [self.bgLocation startLocation];
+//        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(log) userInfo:nil repeats:YES];
+//    }
+//#endif
  
     
     return YES;
@@ -116,13 +121,13 @@
                     [CamObj initAPI];
                     int nRet = 0;
                     
-#if TARGET_IPHONE_SIMULATOR//模拟器
-                    
-                    nRet = [[P2Phandle shareP2PHandle] connectWithTimeout:10 nsDID:@"SLIFE000003BUMUN" nsCamName:@"what"];
-#elif TARGET_OS_IPHONE//真机
+//#if TARGET_IPHONE_SIMULATOR//模拟器
+//                    
+//                    nRet = [[P2Phandle shareP2PHandle] connectWithTimeout:10 nsDID:@"SLIFE000003BUMUN" nsCamName:@"what"];
+//#elif TARGET_OS_IPHONE//真机
                     
                     nRet = [[P2Phandle shareP2PHandle] connectWithTimeout:10 nsDID:model.address nsCamName:model.name];
-#endif
+//#endif
                     if (nRet == -1) {
                         
                         MYLog(@"链接错误 %d",nRet);
@@ -138,6 +143,33 @@
                 }
             }
     });
+    
+}
+
+-(void )requestPM
+{
+    //请求天气预报
+   // NSURL *url = [NSURL URLWithString:@"http://op.juhe.cn/onebox/weather/query"];
+    
+    [RONetworking RONetworkingGetRequestWithURL:@"http://op.juhe.cn/onebox/weather/query" parameter:@{@"cityname":@"深圳",@"key":@"0c6b360f0abad0ff4a72a707bd49bf83"} successBlock:^(id object) {
+        
+       
+       // NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:object options:NSJSONReadingMutableLeaves error:nil];
+      //  NSLog(@"temprature ____%@",dic);
+        
+        NSNumber *pm = object[@"result"][@"data"][@"pm25"][@"pm25"][@"pm25"];
+        NSString *weather = object[@"result"][@"data"][@"weather"][0][@"info"][@"day"][1];
+        
+       // NSLog(@"%@",object);
+        
+        NSDictionary *dict = @{@"pm":pm,@"weather":weather};
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WEIGHTER object:dict];
+        
+    } failureBlock:^(id failure) {
+        
+        NSLog(@"failure");
+    }];
     
 }
 

@@ -25,6 +25,7 @@
 -(NSArray<DeviceModel *> *)getCameras;
 -(NSArray<DeviceModel *> *)getSensors;
 -(NSArray<DeviceModel *>*)getFavorateDevices;
+-(NSArray<DeviceModel *> *)getTemperatures;
 //获取未分配的设备
 -(NSArray *)getIdleDevices;
 //根据roomModel查询已分配的设备

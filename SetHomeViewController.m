@@ -49,12 +49,12 @@
         self.houseModel = house;
         _isFirstSetting = YES;
         
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PERMISSION object:nil];
-            
-        });
+//        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PERMISSION object:nil];
+//            
+//        });
 //
 //         60s 之后  将发送连接失败通知 (安卓是说九十秒之后  会有701的数据接收  觉得 太久了 没意义)
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -62,6 +62,7 @@
 //            [self failedAdding];
 //            
 //        });
+        
     }
     
     return self;
@@ -110,6 +111,7 @@
     [self addBackBtn:self.houseModel.name];
     
     [self addNotifications];
+    
 }
 #pragma mark - 创建视图
 -(UIView *)tableFooterView
@@ -170,6 +172,7 @@
 {
     self.text.text = self.houseModel.name;
 }
+
 #pragma mark - 点击事件
 -(void)acthionHaveDone
 {
@@ -310,7 +313,7 @@
 
 - (void)showAlertViewWithIndexPath:(NSIndexPath *)indexPath {
     
-    HouseModel *model = [HouseModelHandle shareHouseHandle].houses[indexPath.row];
+    HouseModel *model = [HouseModelHandle shareHouseHandle].houses[indexPath.section];
     
     NSString * title = [NSString stringWithFormat:@"%@ \"%@\"",NSLocalizedString(@"Are you sure you want to delete", nil),model.name];
     __weak typeof(self) weakSelf = self;

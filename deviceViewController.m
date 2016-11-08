@@ -266,7 +266,6 @@
         return cell;
     }
     
-  
     
 }
 #pragma mark - deviceCellDelegate
@@ -535,8 +534,15 @@
     NSMutableArray *mut = nil;
     NSUInteger integ = 0;
     
-    DeviceModel *dev = [[fileOperation sharedOperation] getDeviceWithDev_ID:@[diction[@"dev_id"]]][0];
- 
+    NSArray *devices = [[fileOperation sharedOperation] getDeviceWithDev_ID:@[diction[@"dev_id"]]];
+    
+    DeviceModel *dev = nil;
+    
+    if (devices.count != 0) {
+        
+        dev = devices[0];
+   
+    
     if (dev_mode == 0) {
         
         //远程遥控
@@ -551,12 +557,13 @@
             integ = 1;
         }
   
-    }else if(dev_mode == 1)
-    {
-      arr = [_devices copy];
-        mut = _devices;
-        integ = 0;
-    }
+        }else if(dev_mode == 1)
+        {
+            arr = [_devices copy];
+            mut = _devices;
+            integ = 0;
+        }
+    
     
     if (arr.count != 0) {
         
@@ -573,9 +580,13 @@
                 *stop = YES;
             }
         }];
+        
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:integ];
         
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+        
+        
     }
 }
 

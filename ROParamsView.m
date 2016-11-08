@@ -28,6 +28,8 @@
     self = [super init];
     if (self) {
         
+        self.hidden = YES;
+        
         if ([image isKindOfClass:NSClassFromString(@"NSString")]) {
             _head = image;
         }else
@@ -40,6 +42,7 @@
         self.frame = CGRectMake(0, 0,kScreenWidth/3.0f, 30);
         
         [self createUI];
+        
     }
     return self;
 }
@@ -48,6 +51,7 @@
 {
     self = [super init];
     if (self) {
+        self.hidden = YES;
         _contents = contents;
         self.frame = CGRectMake(0, 0,kScreenWidth/3.0f, 30);
         [self setBack];
@@ -142,9 +146,11 @@
 
 -(void )updateContents:(NSString *)contents
 {
+    // 有内容更新 则显示
+    self.hidden = NO;
+    
     UILabel *lab = [self viewWithTag:105];
     
     lab.text = contents;
-    
 }
 @end

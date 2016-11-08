@@ -220,19 +220,7 @@ void STDCALL CallBack_EncodeAudioData(const char *pData, int nSize, void *pUserD
         
         [self.view addSubview:_m_glView.view];
         
-        if ([[cameraOperation sharedOperationHandle] hasCameraBackgoundImageWithDid:_did]) {
-            NSData *data = [[cameraOperation sharedOperationHandle] getCameraBackgoundImageWithDid:_did];
-            _backView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:data]];
-        
-    
-           [self.view addSubview:_backView];
-            
-            [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.equalTo(self.view);
-                make.size.equalTo(self.view);
-            }];
-            
-        }
+        [self addBackViews];
         [self createIndicator];
     }
     
@@ -442,6 +430,22 @@ void STDCALL CallBack_EncodeAudioData(const char *pData, int nSize, void *pUserD
         _tap = tap;
     
 }
+-(void )addBackViews
+{
+    if ([[cameraOperation sharedOperationHandle] hasCameraBackgoundImageWithDid:_did]) {
+        NSData *data = [[cameraOperation sharedOperationHandle] getCameraBackgoundImageWithDid:_did];
+        _backView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:data]];
+        
+        
+        [self.view addSubview:_backView];
+        
+        [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+            make.size.equalTo(self.view);
+        }];
+        
+    }
+}
 #pragma mark - camera control
 - (void)didReceiveMemoryWarning {
     
@@ -520,7 +524,6 @@ int sid = 80;
         device_net_work_startStreamV2(userid, sid, _resolutionType, CallBack_AVData, self);
 
         // 获取参数 设置播放状态等 在此操作 会导致视频开始播放出现几秒钟的黑屏，所以相关操作转移到视频数据回调的方法中
-    
         
 #if 0
         sid++;
@@ -529,9 +532,7 @@ int sid = 80;
         }
 #endif
         
-        
     }
-    
     
     // 开始录像
 //    NSLog(@"record path:%@", betaCompressionDirectory);
@@ -549,7 +550,7 @@ int sid = 80;
         // 录像结束
         x_player_StopRecord(playid);
     }
-
+    
 }
 
 /*!!!!!!!!!!!!!!请注意监听和对讲互斥!!!!!!!!!!!!!!!!!!!!*/
@@ -1012,13 +1013,13 @@ int sid = 80;
     device_net_work_get_param(userid, GET_CAMERA_PARAMS);
     
     //三秒后自动截图
-#if 0
+
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     
                 [self btnSnapshot];
     
             });
-#endif
+         
       });
     
 }
